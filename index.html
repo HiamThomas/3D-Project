@@ -6,19 +6,68 @@
         <link rel="stylesheet" type='text/css' href='x3dom/x3dom.css'></link>
     </head>
     <body>
-        <X3D>
-            <Scene DEF='scene'>
-            </Scene>
-        </X3D>
+        <x3d>
+            <scene>
+                <!-- Wall front -->
+                <Transform  translation='0 0 0'>
+                    <shape> 
+                        <appearance>
+                            <Material diffuseColor='0.8 0.70 0.600'>
+                            </Material>
+                        </appearance> 
+                        <box size="20 4 0.2"> </box> 
+                    </shape> 
+                </Transform>
+                <!-- Wall back -->
+                <Transform translation='-0.1 0 -19.8'>
+                    <shape> 
+                        <appearance>
+                            <Material diffuseColor='0.8 0.70 0.600'>
+                            </Material>
+                        </appearance> 
+                        <box size="20 4 0.2"> </box> 
+                    </shape> 
+                </Transform>
+                <!-- Wall right -->
+                <transform translation='10 0 -9.9' rotation="0 1 0 -1.57">
+                    <shape> 
+                        <appearance> 
+                            <material diffuseColor='0.8 0.70 0.600'></material> 
+                        </appearance> 
+                        <box size="20 4 0.2"></box> 
+                    </shape>
+                </transform>
+                <!-- Wall left -->
+                <transform translation='-10.1 0 -9.9' rotation="0 1 0 -1.57">
+                    <shape> 
+                        <appearance> 
+                            <material diffuseColor='0.8 0.70 0.600'></material> 
+                        </appearance> 
+                        <box size="20 4 0.2"></box> 
+                    </shape>
+                </transform>
+                <!-- Ground -->
+                <Transform  translation='0 -2 -9.9'>
+                    <shape> 
+                        <appearance>
+                            <Material diffuseColor='0.8 0.70 0.600'>
+                            </Material>
+                        </appearance> 
+                        <box size="20 0.01 20"> </box> 
+                    </shape> 
+                </Transform>
+            </scene> 
+        </x3d>
     </body>
 </html>
 
-<script> 
+<script>
 </script> 
 
 <style>
     body{
         margin: 0;
+        overflow-y: hidden;
     }
     x3d{
         width: 100%;

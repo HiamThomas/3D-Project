@@ -6,12 +6,40 @@
         <link rel="stylesheet" type='text/css' href='x3dom/x3dom.css'></link>
     </head>
     <body>
+        <div class="map">
+            <div class="laundry-map" onclick="document.getElementById('laudry').setAttribute('set_bind','true');"></div>
+            <div class="kitchen-map" onclick="document.getElementById('kitchen').setAttribute('set_bind','true');"></div>
+            <div class="dining-room-map" onclick="document.getElementById('dining-room').setAttribute('set_bind','true');"></div>
+            <div class="living-room-map" onclick="document.getElementById('living-room').setAttribute('set_bind','true');"></div>
+            <div class="bathroom-map" onclick="document.getElementById('bathroom').setAttribute('set_bind','true');"></div>
+            <div class="bedroom-bottom-map" onclick="document.getElementById('bedroom-bottom').setAttribute('set_bind','true');"></div>
+            <div class="bedroom-top-map" onclick="document.getElementById('bedroom-top').setAttribute('set_bind','true');"></div>
+            <div class="entrance-map" onclick="document.getElementById('front-door').setAttribute('set_bind','true');"></div>
+            <div class="corridor-map" onclick="document.getElementById('corridor').setAttribute('set_bind','true');"></div>
+        </div>
         <x3d>
             <scene id="scene">
-                <!-------------------- HOUSE WALLS -------------------->
+                <!-------------------- Viewpoints -------------------->
+                <Viewpoint id="overview" position="0.73495 21.23696 -1.66990" orientation="-0.99993 -0.01212 0.00021 1.33430" description="camera"></Viewpoint>
+                <Viewpoint id="front-door" position="-3.58701 -0.37621 -0.74903" orientation="-0.84903 -0.52802 -0.01844 0.08221" description="camera"></Viewpoint>
+                <Viewpoint id="laudry" position="-4.70071 -0.40136 -3.08986" orientation="-0.02389 0.99934 0.02735 1.70610" description="camera"></Viewpoint>
+                <Viewpoint id="bathroom" position="-2.52682 -0.37601 -3.13332" orientation="-0.05262 -0.99684 -0.05957 1.69764" description="camera"></Viewpoint>
+                <Viewpoint id="kitchen" position="-6.02033 -0.37607 -9.85910" orientation="-0.00786 0.99908 0.04222 2.77388" description="camera"></Viewpoint>
+                <Viewpoint id="dining-room" position="-3.89830 -0.37626 -12.08463" orientation="-0.04364 0.99810 0.04358 1.57118" description="camera"></Viewpoint>
+                <Viewpoint id="living-room" position="-1.47600 -0.37912 -14.32652" orientation="0.02661 0.99828 0.05232 4.08115" description="camera"></Viewpoint>
+                <Viewpoint id="bedroom-top" position="9.58095 -0.38620 -0.70724" orientation="-0.20796 0.97512 0.07674 0.72359" description="camera"></Viewpoint>
+                <Viewpoint id="bedroom-bottom" position="4.71573 -0.38599 -7.31331" orientation="-0.24797 -0.96641 -0.06758 0.54971" description="camera"></Viewpoint>
+                <Viewpoint id="corridor" position="1.50990 -0.37711 -6.22202" orientation="-0.06588 -0.99597 -0.06092 1.49649" description="camera"></Viewpoint>
+
+                <!-------------------- Lights -------------------->
+                <SpotLight id='spot' on ="TRUE" beamWidth='0.1' intensity='0.2' color='1 0.94 0.7' cutOffAngle='3' location='-7.8 10 -7.5' radius='22' shadowIntensity='0.3'  shadowCascades="1" shadowFilterSize="16" shadowMapSize="512">  </SpotLight>
+                <SpotLight id='spot' on ="TRUE" beamWidth='0.1' intensity='0.2' color='1 0.94 0.7' cutOffAngle='3' location='6.7 10 -1.2' radius='22' shadowIntensity='0.3'  shadowCascades="1" shadowFilterSize="16" shadowMapSize="512">  </SpotLight>
+                <Environment id="gamma" gammaCorrectionDefault="linear"></Environment> 
+
+                <!-------------------- House Walls -------------------->
                 <!-- Wall front -->
                 <Transform  translation='0 -0.5 0'>
-                    <shape> 
+                    <shape>
                         <appearance>
                             <Material diffuseColor='0.8 0.70 0.600'>
                             </Material>
@@ -48,25 +76,45 @@
                     </shape>
                 </transform>
                 <!-- Ground -->
-                <Transform  translation='0 -2 -7.45'>
+                <Transform  translation='0 -2 -7.5'>
                     <shape> 
                         <appearance>
-                            <Material diffuseColor='1 0 0'>
+                            <Material diffuseColor='0.8 0.70 0.600'>
                             </Material>
                         </appearance> 
                         <box size="20 0.01 15"> </box> 
                     </shape> 
                 </Transform>
                 <!-- Wall#1 -->
-                <Transform translation='-5 -0.5 -2.5'>
+                <Transform translation='-5 -0.5 -1.3'>
                     <shape> 
                         <appearance>
                             <Material diffuseColor='0.8 0.70 0.600'>
                             </Material>
                         </appearance> 
-                        <box size="0.1 3 5"> </box> 
+                        <box size="0.1 3 2.6"> </box> 
                     </shape> 
                 </Transform>
+                <!-- Wall#1.2 -->
+                <Transform translation='-5 -0.5 -4.275'>
+                    <shape> 
+                        <appearance>
+                            <Material diffuseColor='0.8 0.70 0.600'>
+                            </Material>
+                        </appearance> 
+                        <box size="0.1 3 1.45"> </box> 
+                    </shape> 
+                </Transform>
+                <!-- Wall#1.3 -->
+                <Transform translation='-5 0.5 -2.5'>
+                    <shape> 
+                        <appearance>
+                            <Material diffuseColor='0.8 0.70 0.600'>
+                            </Material>
+                        </appearance> 
+                        <box size="0.1 1 5"> </box> 
+                    </shape> 
+                </Transform>   
                 <!-- Wall#2 -->
                 <Transform translation='-5 -0.5 -6.6'>
                     <shape>
@@ -88,13 +136,33 @@
                     </shape> 
                 </Transform>
                 <!-- Wall#4 -->
-                <Transform translation='-2 -0.5 -2.5'>
+                <Transform translation='-2 -0.5 -1.3'>
                     <shape> 
                         <appearance>
                             <Material diffuseColor='0.8 0.70 0.600'>
                             </Material>
                         </appearance> 
-                        <box size="0.1 3 5"> </box> 
+                        <box size="0.1 3 2.6"> </box> 
+                    </shape> 
+                </Transform>
+                <!-- Wall#4.2 -->
+                <Transform translation='-2 -0.5 -4.275'>
+                    <shape> 
+                        <appearance>
+                            <Material diffuseColor='0.8 0.70 0.600'>
+                            </Material>
+                        </appearance> 
+                        <box size="0.1 3 1.45"> </box> 
+                    </shape> 
+                </Transform>
+                <!-- Wall#4.3 -->
+                <Transform translation='-2 0.5 -2.5'>
+                    <shape> 
+                        <appearance>
+                            <Material diffuseColor='0.8 0.70 0.600'>
+                            </Material>
+                        </appearance> 
+                        <box size="0.1 1 5"> </box> 
                     </shape> 
                 </Transform>
                 <!-- Wall#5 -->
@@ -108,23 +176,63 @@
                     </shape> 
                 </Transform>
                 <!-- Wall#6 -->
-                <Transform translation='5.9 -0.5 -3.75'>
+                <Transform translation='5.9 -0.5 -2.8625'>
                     <shape> 
                         <appearance>
                             <Material diffuseColor='0.8 0.70 0.600'>
                             </Material>
                         </appearance> 
-                        <box size="0.1 3 7.4"> </box> 
+                        <box size="0.1 3 5.725"> </box>
+                    </shape> 
+                </Transform>
+                <!-- Wall#6.2 -->
+                <Transform translation='5.9 -0.5 -7.0875'>
+                    <shape> 
+                        <appearance>
+                            <Material diffuseColor='0.8 0.70 0.600'>
+                            </Material>
+                        </appearance> 
+                        <box size="0.1 3 0.625"> </box>
+                    </shape> 
+                </Transform>
+                <!-- Wall#6.3 -->
+                <Transform translation='5.9 0.5 -3.75'>
+                    <shape> 
+                        <appearance>
+                            <Material diffuseColor='0.8 0.70 0.600'>
+                            </Material>
+                        </appearance> 
+                        <box size="0.1 1 7.4"> </box> 
                     </shape> 
                 </Transform>
                 <!-- Wall#7 -->
-                <Transform translation='4 -0.5 -7.4'>
+                <Transform translation='7.75 -0.5 -7.4'>
                     <shape> 
                         <appearance>
                             <Material diffuseColor='0.8 0.70 0.600'>
                             </Material>
                         </appearance> 
-                        <box size="12 3 0.1"> </box> 
+                        <box size="4.5 3 0.1"> </box>
+                    </shape> 
+                </Transform>
+                <!-- Wall#7.2 -->
+                <Transform translation='1.25 -0.5 -7.4'>
+                    <shape> 
+                        <appearance>
+                            <Material diffuseColor='0.8 0.70 0.600'>
+                            </Material>
+                        </appearance> 
+                        <box size="6.5 3 0.1"> </box>
+                    </shape> 
+                </Transform>
+                <!-- Wall#7.3 -->
+                <Transform translation='4 0.5 -7.4'>
+                    <shape> 
+                        <appearance>
+                            <Material diffuseColor='0.8 0.70 0.600'>
+                            </Material>
+                        </appearance> 
+                        <box size="12 1 0.1"> </box>
                     </shape> 
                 </Transform>
                 <!-- Wall#8 -->
@@ -137,44 +245,138 @@
                         <box size="0.1 3 7.5"> </box> 
                     </shape> 
                 </Transform>
-                <!-------------------Salon--------------------->
-                <Transform translation='-7 -2 -12'>
+                
+
+                <!-------------------- General structures -------------------->
+                <!-----------Doors------------>
+                <Transform translation='-3.5 -2 -0.1' scale="0.35 0.35 0.35" rotation="0 1 0 3.14">
+                    <Inline url="glTF/door_external.glb"></Inline>
+                </Transform>
+                <!-----------Doors------------>
+                <Transform translation='-3.5 -2 0.1' scale="0.35 0.35 0.35">
+                    <Inline url="glTF/door_external.glb"></Inline>
+                </Transform>
+                <!-----------Floors------------>
+                <Transform translation='-1.3 -1.97 -3.7' scale="1.25 1.25 1.25">
+                    <Inline url="glTF/floor_tiled_texture.glb"></Inline>
+                </Transform>
+                <!-----------Floors------------>
+                <Transform translation='2.2 -1.971 -3.7' scale="1.25 1.25 1.25">
+                    <Inline url="glTF/floor_tiled_texture.glb"></Inline>
+                </Transform>
+                <!-----------Floors------------>
+                <Transform translation='0.3 -1.973 -11.19' scale="1.25 1.25 1.25">
+                    <Inline url="glTF/floor_tiled_texture.glb"></Inline>
+                </Transform>
+                <!-----------Floors------------>
+                <Transform translation='-6.3 -1.976 -11.2' scale="1.25 1.25 1.25">
+                    <Inline url="glTF/floor_tiled_texture.glb"></Inline>
+                </Transform>
+                <!-----------Floors------------>
+                <Transform translation='-6.3 -1.97 -8.8' scale="1.25 1.25 1.25">
+                    <Inline url="glTF/floor_tiled_texture.glb"></Inline>
+                </Transform>
+
+
+                <!------------------- Corridor --------------------->
+                <Transform translation='-4.4 -2 -5' rotation="0 1 0 1.57" scale="1.25 1.25 1.25">
+                    <Inline url="glTF/cabinet.glb"></Inline>
+                </Transform>
+                <!----------------------->
+                <Transform translation='-4.6 -0.78 -5' rotation="0 1 0 1.57" scale="1 1 1">
+                    <Inline url="glTF/house_plant3.glb"></Inline>
+                </Transform>
+                <!----------------------->
+                <Transform translation='-4.6 -2 -0.4' scale="0.007 0.007 0.007">
+                    <Inline url="glTF/coat_hanger.glb"></Inline>
+                </Transform>
+
+
+                <!------------------- Living room --------------------->
+                <Transform translation='-7 -2 -12' rotation="0 1 0 1.15">
                     <Inline url="glTF/table.glb"></Inline>
                 </Transform>
                 <!----------------------->
                 <Transform translation='-9.5 -2 -14.2' scale="0.2 0.2 0.2">
                     <Inline url="glTF/house_plant.glb"></Inline>
                 </Transform>
+                <!----------------------->
+                <Transform translation='0 -2 -11' scale="0.01 0.01 0.01" rotation="0 1 0 3.14">
+                    <Inline url="glTF/sofa.glb"></Inline>
+                </Transform>
+                <!----------------------->
+                <Transform translation='3.3 -1.56 -11' scale="1.5 1.5 1.5" rotation="0 1 0 4.71">
+                    <Inline url="glTF/sofa2.glb"></Inline>
+                </Transform>
+                <!----------------------->
+                <Transform translation='1.8 -2 -13' scale="0.9 0.9 0.9" >
+                    <Inline url="glTF/sofa3.glb"></Inline>
+                </Transform>
+                <!----------------------->
+                <Transform translation='2 -2 -11' scale="1.4 1.4 1.4" rotation="0 1 0 4.71">
+                    <Inline url="glTF/coffee_table.glb"></Inline>
+                </Transform>
+                <!----------------------->
+                <Transform translation='3.5 -0.8 -13' scale="0.006 0.006 0.006" rotation="0 1 0 1.57">
+                    <Inline url="glTF/lamp.glb"></Inline>
+                </Transform>
+                <!----------------------->
+                <Transform translation='3.5 -0.8 -9' scale="0.006 0.006 0.006" rotation="0 1 0 1.57">
+                    <Inline url="glTF/lamp.glb"></Inline>
+                </Transform>
+                <!----------------------->
+                <Transform translation='1.5 -2 -7.8' scale="1.2 1.2 1.2" rotation="0 1 0 1.57">
+                    <Inline url="glTF/tv_shelf.glb"></Inline>
+                </Transform>
+                <!----------------------->
+                <Transform translation='1.5 -0.85 -7.8' scale="0.8 0.8 0.8" rotation="0 1 0 3.14">
+                    <Inline url="glTF/tv.glb"></Inline>
+                </Transform>
+                <!----------------------->
+                <Transform translation='-3.5 -2 -14.5' scale="0.13 0.13 0.13" rotation="0 1 0 4.71">
+                    <Inline url="glTF/shelf2.glb"></Inline>
+                </Transform>
+                <!----------------------->
+                <Transform translation='3.95 -2 -14.9' scale="0.2 0.2 0.2">
+                    <Inline url="glTF/shelf.glb"></Inline>
+                </Transform>
+                <!----------------------->
+                <Transform translation='-9.5 -2 -11' scale="1 1 1" rotation="0 1 0 1.57">
+                    <Inline url="glTF/console_table.glb"></Inline>
+                </Transform>
 
-                <!-------------------Bathroom--------------------->
-                <Transform translation='4.4 -1.95 -0.7' scale="0.015 0.015 0.015" rotation="0 1 0 3.14">
-                    <Inline url="glTF/bathtub.glb"></Inline>
+
+                <!-------------------Kitchen--------------------->
+                <Transform translation='-5 -2 -5.1' scale="13 13 13" rotation="0 1 0 3.14">
+                    <Inline url="glTF/kitchen_cabinet.glb"></Inline>
                 </Transform>
                 <!----------------------->
-                <Transform translation='-1.2 -1.95 -0.8' scale="0.007 0.007 0.007" >
-                    <Inline url="glTF/shower.glb"></Inline>
+                <Transform translation='-10.6 -2 -7.9' scale="1 1 1" rotation="0 1 0 1.57">
+                    <Inline url="glTF/fridge.glb"></Inline>
                 </Transform>
                 <!----------------------->
-                <Transform translation='2 -1.95 -4.4' scale="0.05 0.05 0.05" >
-                    <Inline url="glTF/bathroom_sink.glb"></Inline>
+                <Transform translation='-7.8 -1.21 -7.5' scale="0.006 0.006 0.006" rotation="0 1 0 4.71">
+                    <Inline url="glTF/dining_table.glb"></Inline>
                 </Transform>
                 <!----------------------->
-                <Transform translation='-0.45 -1.6 -2.5' scale="0.0052 0.005 0.0067" >
-                    <Inline url="glTF/bathroom_tiles.glb"></Inline>
+                <Transform translation='-9 -2.8 -7.5' scale="0.45 0.45 0.45" rotation="0 1 0 1.57">
+                    <Inline url="glTF/kitchen_shelf.glb"></Inline>
                 </Transform>
                 <!----------------------->
-                <Transform translation='3.5 -1.6 -2.5' scale="0.0052 0.005 0.0067" >
-                    <Inline url="glTF/bathroom_tiles.glb"></Inline>
+                <Transform translation='-9.5 -2 -5.4' scale="0.25 0.25 0.25" rotation="0 1 0 1.57">
+                    <Inline url="glTF/trash_can.glb"></Inline>
                 </Transform>
                 <!----------------------->
-                <Transform translation='2 -2.26 -2.9' scale="0.03 0.03 0.03" >
-                    <Inline url="glTF/carpet.glb"></Inline>
+                <Transform translation='-9.5 -1.2 -5.4' scale="0.7 0.7 0.7" rotation="0 1 0 3.14">
+                    <Inline url="glTF/towel.glb"></Inline>
                 </Transform>
-                <!-----------------------MIROIR NE REFLETE PAS-->
-                <!-- <Transform translation='3 -2 -5.4' scale="0.015 0.015 0.015" rotation="0 1 0 1.57">
-                    <Inline url="glTF/small_bathroom_mirror.glb"></Inline>
-                </Transform> -->
-                <!-------------------Bedroom--------------------->
+
+                
+                <!-------------------Bedroom (top)--------------------->
+                <Transform translation='4.4 -1 -7.8' scale="1 1 1" rotation="0 1 0 1.9">
+                    <Inline url="glTF/door.glb"></Inline>
+                </Transform>
+                <!----------------------->
                 <Transform translation='6.9 -2 -13.2' scale="0.013 0.013 0.013">
                     <Inline url="glTF/bed.glb"></Inline>
                 </Transform>
@@ -195,9 +397,135 @@
                     <Inline url="glTF/computer_chair.glb"></Inline>
                 </Transform>
                 <!----------------------->
-                <Transform translation='7 -1.99 -11.15' scale="0.023 0.0295 0.0295">
+                <Transform translation='7 -1.98 -11.15' scale="0.023 0.0295 0.0295">
                     <Inline url="glTF/wooden_floor.glb"></Inline>
                 </Transform>
+                <!----------------------->
+                <Transform translation='4.2 -1.97 -11' scale="1 1 1" rotation="0 1 0 1.57">
+                    <Inline url="glTF/record_table.glb"></Inline>
+                </Transform>
+                <Transform translation='4.3 -1.4 -11' scale="0.5 0.5 0.5" rotation="0 1 0 1.57">
+                    <Inline url="glTF/house_plant2.glb"></Inline>
+                </Transform>
+
+
+                <!-------------------Bedroom (bottom)--------------------->
+                <Transform translation='6.2 -1 -7' scale="1 1 1" rotation="0 1 0 0.70">
+                    <Inline url="glTF/door.glb"></Inline>
+                </Transform>
+                <!----------------------->
+                <Transform translation='6.7 -1 -1.2' scale="0.13 0.13 0.13" rotation="0 1 0 1.57">
+                    <Inline url="glTF/bunk_bed.glb"></Inline>
+                </Transform>
+                <!----------------------->
+                <Transform translation='7.6 -2 -0.3' scale="0.6 0.6 0.6" rotation="0 1 0 3.14">
+                    <Inline url="glTF/nightstand.glb"></Inline>
+                </Transform>
+                <!----------------------->
+                <Transform translation='10 -2 -5' scale="5.3 5.3 5.3" rotation="0 1 0 4.71">
+                    <Inline url="glTF/office_desk.glb"></Inline>
+                </Transform>
+                <!----------------------->
+                <Transform translation='9 -2 -3.9' scale="1 1 1" rotation="0 1 0 1.57">
+                    <Inline url="glTF/computer_chair.glb"></Inline>
+                </Transform>
+                <!----------------------->
+                <Transform translation='9 -2 -7.1' scale="1 1 1">
+                    <Inline url="glTF/book_shelf.glb"></Inline>
+                </Transform>
+                <!----------------------->
+                <Transform translation='9.8 -0.4 -2.5' scale="0.1 0.1 0.1" rotation="0 1 0 3.14">
+                    <Inline url="glTF/shelf3.glb"></Inline>
+                </Transform>
+                <!----------------------->
+                <Transform translation='9.8 -0.7 -2' scale="0.1 0.1 0.1" rotation="0 1 0 3.14">
+                    <Inline url="glTF/shelf3.glb"></Inline>
+                </Transform>
+                <!----------------------->
+                <Transform translation='7 -1.98 -3.72' scale="0.023 0.0295 0.0295">
+                    <Inline url="glTF/wooden_floor.glb"></Inline>
+                </Transform>
+
+
+
+                <!-------------------Laundry--------------------->
+                <Transform translation='-5.4 -1 -2.4' scale="1 1 1" rotation="0 1 0 3.6">
+                    <Inline url="glTF/door.glb"></Inline>
+                </Transform>
+                <!----------------------->
+                <Transform translation='-7.3 -1.68 -4.55' scale="0.3 0.3 0.3">
+                    <Inline url="glTF/washing_machine.glb"></Inline>
+                </Transform>
+                <!----------------------->
+                <Transform translation='-6 -2.3 -4.6' scale="0.015 0.015 0.015">
+                    <Inline url="glTF/washbasin.glb"></Inline>
+                </Transform>
+                <!----------------------->
+                <Transform translation='-8 -1.55 -4.5' scale="0.026 0.026 0.026">
+                    <Inline url="glTF/washing_machine_2.glb"></Inline>
+                </Transform>
+                <!-----------plaque évier------------>
+                <transform translation='-8.5 -1.06 -4.6' >
+                    <shape> 
+                        <appearance> 
+                            <material diffuseColor='0.8 0.70 0.600'></material> 
+                        </appearance> 
+                        <box size="3.2 0.05 0.8"></box> 
+                    </shape>
+                </transform>
+                <!----------------------->
+                <Transform translation='-7.5 -1.6 -2.6' scale="0.0052 0.005 0.0067" rotation="0 1 0 1.57">
+                    <Inline url="glTF/bathroom_tiles.glb"></Inline>
+                </Transform>
+                <!----------------------->
+                <Transform translation='-7.5 -1.59 -1.5' scale="0.0052 0.005 0.0067" rotation="0 1 0 1.57">
+                    <Inline url="glTF/bathroom_tiles.glb"></Inline>
+                </Transform>
+                <!----------------------->
+                <Transform translation='-8 -2 -0.3' scale="0.014 0.014 0.014" rotation="0 1 0 3.14">
+                    <Inline url="glTF/table_furniture.glb"></Inline>
+                </Transform>
+                <!----------------------->
+                <Transform translation='-9 -1.5 -2' scale="2 2 2" rotation="0 1 0 3.14">
+                    <Inline url="glTF/clothes_drying_rack.glb"></Inline>
+                </Transform>
+
+
+                <!-------------------Bathroom--------------------->
+                <Transform translation='-1.7 -1 -3.8' scale="1 1 1" rotation="0 1 0 0.70">
+                    <Inline url="glTF/door.glb"></Inline>
+                </Transform>
+                <!----------------------->
+                <Transform translation='4.4 -1.95 -0.7' scale="0.015 0.015 0.015" rotation="0 1 0 3.14">
+                    <Inline url="glTF/bathtub.glb"></Inline>
+                </Transform>
+                <!----------------------->
+                <Transform translation='-1.4 -1.95 -0.6' scale="0.005 0.005 0.005" >
+                    <Inline url="glTF/shower.glb"></Inline>
+                </Transform>
+                <!----------------------->
+                <Transform translation='2 -1.95 -4.55' scale="0.035 0.035 0.035" >
+                    <Inline url="glTF/bathroom_sink.glb"></Inline>
+                </Transform>
+                <!----------------------->
+                <Transform translation='-0.45 -1.57 -2.5' scale="0.0052 0.005 0.0067" >
+                    <Inline url="glTF/bathroom_tiles.glb"></Inline>
+                </Transform>
+                <!----------------------->
+                <Transform translation='3.5 -1.57 -2.5' scale="0.0052 0.005 0.0067" >
+                    <Inline url="glTF/bathroom_tiles.glb"></Inline>
+                </Transform>
+                <!----------------------->
+                <Transform translation='2 -2.24 -3.1' scale="0.03 0.03 0.03" >
+                    <Inline url="glTF/carpet.glb"></Inline>
+                </Transform>
+                <!----------------------->
+                <Transform translation='2 -0.5 -1' scale="0.017 0.017 0.017" rotation="0 1 0 3.14">
+                    <Inline url="glTF/heated_towel.glb"></Inline>
+                </Transform>
+
+
+
             </scene> 
         </x3d>
     </body>
@@ -209,10 +537,106 @@
 <style>
     body{
         margin: 0;
-        overflow-y: hidden;
-    }
-    x3d{
         width: 100%;
         height: 100%;
+        overflow-y: hidden;
     }
+
+    x3d{
+        width: 100%;
+        height: 100vh;
+    }
+
+    .map{
+        position: absolute;
+        top: 0px;
+        right: 0;
+        max-width: 410px;
+        max-height: 306px;
+        width: 410px;
+        height: 306px;
+        z-index: 100;
+        background-image: url("glTF/map.PNG");
+        background-size: cover;
+    }
+
+    .laundry-map{
+        position: absolute;
+        background-color: transparent;
+        width: 110px;
+        height: 110px;
+        bottom: 0;
+    }
+
+    .kitchen-map{
+        position: absolute;
+        background-color: transparent;
+        width: 110px;
+        height: 70px;
+        bottom: 110px;
+    }
+
+    .dining-room-map{
+        position: absolute;
+        background-color: transparent;
+        width: 110px;
+        height: 126px;
+        top: 0;
+    }
+
+    .living-room-map{
+        position: absolute;
+        background-color: transparent;
+        width: 180px;
+        height: 155px;
+        top: 0;
+        left: 110px;
+    }
+
+    .bathroom-map{
+        position: absolute;
+        background-color: transparent;
+        width: 160px;
+        height: 105px;
+        bottom: 0;
+        left: 165px;
+    }
+
+    .bedroom-top-map{
+        position: absolute;
+        background-color: transparent;
+        width: 85px;
+        height: 151px;
+        right: 0;
+        bottom: 0;
+    }
+
+    .bedroom-bottom-map{
+        position: absolute;
+        background-color: transparent;
+        width: 120px;
+        height: 155px;
+        right: 0;
+        top: 0;
+    }
+
+    .entrance-map{
+        position: absolute;
+        background-color: transparent;
+        width: 55px;
+        height: 151px;
+        left: 110px;
+        bottom: 0;
+    }
+
+    .corridor-map{
+        position: absolute;
+        background-color: transparent;
+        width: 160px;
+        height: 46px;
+        left: 165px;
+        bottom: 105px;
+    }
+
+   
 </style>
